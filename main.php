@@ -11,7 +11,7 @@ $standard_board = [
     [none,none,none]
 ];
 
-function print_board($board){
+function printBoard($board){
     for ($i=0 ; $i <= 2 ; $i++){
         for($j=0 ; $j <= 2 ; $j++){
         echo $board[$i][$j];
@@ -20,7 +20,7 @@ function print_board($board){
     }
 }
 
-function player_turn(){
+function playerTurn(){
     echo "Your turn!\n";
     $row = trim(fgets(STDIN));
     $col = trim(fgets(STDIN));
@@ -28,7 +28,7 @@ function player_turn(){
 }
 
 //引数の名前は関数内外で合わせた方が良い
-function player_put($row,$col,$board){
+function playerPut($row,$col,$board){
     if(0<=$row && $row<=2 && 0<=$col&& $col<=2 ){
         $board[$row][$col] = piece_o;
         return $board;
@@ -37,7 +37,7 @@ function player_put($row,$col,$board){
     }
 }
 
-function victory_judgment(array $play_board){
+function victoryJudgment(array $play_board){
     if($play_board[0][0] == none and $play_board[0][1] == none and $play_board[0][2] == none){
         echo "you win!\n";
     }else{
@@ -45,7 +45,7 @@ function victory_judgment(array $play_board){
     }
 }
 
-function cpu_put($board){
+function cpuPut($board){
     $cpu_row = rand(0,2);
     $cpu_col=rand(0,2);
     if($board[$cpu_row][$cpu_col] == none ){
@@ -57,7 +57,7 @@ function cpu_put($board){
     }
 }
 
-function top_or_bottom(){
+function topOrBottom(){
     echo "Do you want to be the first to start? yes or no.\n";
     $answer = trim(fgets(STDIN));
     if($answer == "yes" or $answer == "y"){
@@ -67,7 +67,7 @@ function top_or_bottom(){
     }
 }
 
-function n_exists(){
+function nExists(){
     for ($a=0 ; $a <= 2 ; $a++){
         for($b=0 ; $b <= 2 ; $b++){
         echo $board[$a][$b];
