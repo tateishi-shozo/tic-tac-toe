@@ -105,7 +105,7 @@ function nExists(){
 //     echo '後攻じゃぁぁぁ';
 // }
 
-for($x=0 ; $x <= 2 ; $x++){
+while(empty($continue)){
 
 $input =  playerTurn();
 
@@ -123,6 +123,8 @@ $cpu_board = cpuPut($player_board);
 
 printBoard($cpu_board);
 
-victoryJudgment($cpu_board);
+$continue = victoryJudgment($cpu_board);
+
+$x = $x + 1;
 
 }
