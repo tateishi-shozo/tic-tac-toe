@@ -1,14 +1,12 @@
 <?php 
-define("piece_o"," o ");
-define("piece_x"," x " );
-define("none"," n ");
-define("randam_play","");
+define("PIECE_O"," O ");
+define("PIECE_X"," X " );
+define("NONE"," n ");
 
-$game_count = 0;
 $standard_board = [
-    [none,none,none],
-    [none,none,none],
-    [none,none,none]
+    [NONE,NONE,NONE],
+    [NONE,NONE,NONE],
+    [NONE,NONE,NONE]
 ];
 
 function printBoard($board){
@@ -30,30 +28,53 @@ function playerTurn(){
 //引数の名前は関数内外で合わせた方が良い
 function playerPut($row,$col,$board){
     if(0<=$row && $row<=2 && 0<=$col&& $col<=2 ){
-        $board[$row][$col] = piece_o;
+        $board[$row][$col] = PIECE_O;
         return $board;
     } else{
         echo "again!";
     }
 }
 
+//定数はシングルクォーテーション
 function victoryJudgment(array $play_board){
-    if($play_board[0][0] == none and $play_board[0][1] == none and $play_board[0][2] == none){
-        echo "you win!\n";
-    }else{
-        echo "you lose!\n";
+    switch($play_board){
+        //横
+        case $play_board[0][0] == ' O '  and $play_board[0][1] == ' O '  and $play_board[0][2] == ' O ';
+        case $play_board[1][0] == ' O '  and $play_board[1][1] == ' O '  and $play_board[1][2] == ' O ';
+        case $play_board[2][0] == ' O '  and $play_board[2][1] == ' O '  and $play_board[2][2] == ' O ';
+        //縦
+        case $play_board[0][0] == ' O '  and $play_board[1][0] == ' O '  and $play_board[2][0] == ' O ';
+        case $play_board[0][1] == ' O '  and $play_board[1][1] == ' O '  and $play_board[2][1] == ' O ';
+        case $play_board[0][2] == ' O '  and $play_board[1][2] == ' O '  and $play_board[2][2] == ' O ';
+        //斜め
+        case $play_board[0][0] == ' O '  and $play_board[1][1] == ' O '  and $play_board[2][2] == ' O ';
+        case $play_board[0][2] == ' O '  and $play_board[1][1] == ' O '  and $play_board[2][0] == ' O ';
+            echo "you win!\n";
+            break;
+        
+        case $play_board[0][0] == ' X '  and $play_board[0][1] == ' X '  and $play_board[0][2] == ' X ';
+        case $play_board[1][0] == ' X '  and $play_board[1][1] == ' X '  and $play_board[1][2] == ' X ';
+        case $play_board[2][0] == ' X '  and $play_board[2][1] == ' X '  and $play_board[2][2] == ' X ';
+        //縦
+        case $play_board[0][0] == ' X '  and $play_board[1][0] == ' X '  and $play_board[2][0] == ' X ';
+        case $play_board[0][1] == ' X '  and $play_board[1][1] == ' X '  and $play_board[2][1] == ' X ';
+        case $play_board[0][2] == ' X '  and $play_board[1][2] == ' X '  and $play_board[2][2] == ' X ';
+        //斜め
+        case $play_board[0][0] == ' X '  and $play_board[1][1] == ' X '  and $play_board[2][2] == ' X ';
+        case $play_board[0][2] == ' X '  and $play_board[1][1] == ' X '  and $play_board[2][0] == ' X ';
+            echo "you win!\n";
     }
 }
 
 function cpuPut($board){
     $cpu_row = rand(0,2);
     $cpu_col=rand(0,2);
-    if($board[$cpu_row][$cpu_col] == none ){
-        $board[$cpu_row][$cpu_col] = piece_x;
+    if($board[$cpu_row][$cpu_col] == NONE ){
+        $board[$cpu_row][$cpu_col] = PIECE_X;
         echo "cpu turn!\n";
         return $board;
     }else{
-        return cpu_put($board);
+        return cpuPut($board);
     }
 }
 
@@ -86,16 +107,22 @@ function nExists(){
 
 for($x=0 ; $x <= 2 ; $x++){
 
-$input =  player_turn();
+$input =  playerTurn();
 
-$player_board = player_put($input[0],$input[1],$standard_board);
+if($x==0){
+    $player_board = playerPut($input[0],$input[1],$standard_board);
+}else{
+    $player_board = playerPut($input[0],$input[1],$cpu_board);
+}
 
-print_board($player_board);
+printBoard($player_board);
 
 // victory_judgment($player_board);
 
-$cpu_board = cpu_put($now_board);
+$cpu_board = cpuPut($player_board);
 
-print_board($cpu_board);
+printBoard($cpu_board);
+
+victoryJudgment($cpu_board);
 
 }
