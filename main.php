@@ -50,6 +50,7 @@ function victoryJudgment(array $play_board){
         case $play_board[0][0] == ' O '  and $play_board[1][1] == ' O '  and $play_board[2][2] == ' O ';
         case $play_board[0][2] == ' O '  and $play_board[1][1] == ' O '  and $play_board[2][0] == ' O ';
             echo "you win!\n";
+            return 0;
             break;
         
         case $play_board[0][0] == ' X '  and $play_board[0][1] == ' X '  and $play_board[0][2] == ' X ';
@@ -62,7 +63,9 @@ function victoryJudgment(array $play_board){
         //斜め
         case $play_board[0][0] == ' X '  and $play_board[1][1] == ' X '  and $play_board[2][2] == ' X ';
         case $play_board[0][2] == ' X '  and $play_board[1][1] == ' X '  and $play_board[2][0] == ' X ';
-            echo "you win!\n";
+            echo "cpus win!\n";
+            return 0;
+            brea;
     }
 }
 
@@ -78,24 +81,24 @@ function cpuPut($board){
     }
 }
 
-function topOrBottom(){
-    echo "Do you want to be the first to start? yes or no.\n";
-    $answer = trim(fgets(STDIN));
-    if($answer == "yes" or $answer == "y"){
-        return true;
-    }else{
-        return false;
-    }
-}
+// function topOrBottom(){
+//     echo "Do you want to be the first to start? yes or no.\n";
+//     $answer = trim(fgets(STDIN));
+//     if($answer == "yes" or $answer == "y"){
+//         return true;
+//     }else{
+//         return false;
+//     }
+// }
 
-function nExists(){
-    for ($a=0 ; $a <= 2 ; $a++){
-        for($b=0 ; $b <= 2 ; $b++){
-        echo $board[$a][$b];
-        }
-        echo "\n";
-    }
-}
+// function nExists(){
+//     for ($a=0 ; $a <= 2 ; $a++){
+//         for($b=0 ; $b <= 2 ; $b++){
+//         echo $board[$a][$b];
+//         }
+//         echo "\n";
+//     }
+// }
 
 ///////////////////////////////////
 
@@ -105,7 +108,7 @@ function nExists(){
 //     echo '後攻じゃぁぁぁ';
 // }
 
-while(empty($continue)){
+while(empty($judgement)){
 
 $input =  playerTurn();
 
@@ -117,13 +120,11 @@ if($x==0){
 
 printBoard($player_board);
 
-// victory_judgment($player_board);
-
 $cpu_board = cpuPut($player_board);
 
 printBoard($cpu_board);
 
-$continue = victoryJudgment($cpu_board);
+$judgement = victoryJudgment($cpu_board);
 
 $x = $x + 1;
 
