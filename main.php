@@ -50,7 +50,6 @@ function victoryJudgment(array $play_board){
         case $play_board[0][0] == ' O '  and $play_board[1][1] == ' O '  and $play_board[2][2] == ' O ';
         case $play_board[0][2] == ' O '  and $play_board[1][1] == ' O '  and $play_board[2][0] == ' O ';
             echo "you win!\n";
-            return 0;
             break;
         
         case $play_board[0][0] == ' X '  and $play_board[0][1] == ' X '  and $play_board[0][2] == ' X ';
@@ -64,8 +63,7 @@ function victoryJudgment(array $play_board){
         case $play_board[0][0] == ' X '  and $play_board[1][1] == ' X '  and $play_board[2][2] == ' X ';
         case $play_board[0][2] == ' X '  and $play_board[1][1] == ' X '  and $play_board[2][0] == ' X ';
             echo "cpus win!\n";
-            return 0;
-            brea;
+            break;
     }
 }
 
