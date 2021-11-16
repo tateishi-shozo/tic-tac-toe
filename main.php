@@ -36,34 +36,37 @@ function playerPut($row,$col,$board){
 }
 
 //定数はシングルクォーテーション
-function victoryJudgment(array $play_board){
+function victoryJudgment(array $play_board): bool
+{
     switch($play_board){
         //横
-        case $play_board[0][0] == ' O '  and $play_board[0][1] == ' O '  and $play_board[0][2] == ' O ';
-        case $play_board[1][0] == ' O '  and $play_board[1][1] == ' O '  and $play_board[1][2] == ' O ';
-        case $play_board[2][0] == ' O '  and $play_board[2][1] == ' O '  and $play_board[2][2] == ' O ';
+        case $play_board[0][0] == ' O '  and $play_board[0][1] == ' O '  and $play_board[0][2] == ' O ':
+        case $play_board[1][0] == ' O '  and $play_board[1][1] == ' O '  and $play_board[1][2] == ' O ':
+        case $play_board[2][0] == ' O '  and $play_board[2][1] == ' O '  and $play_board[2][2] == ' O ':
         //縦
-        case $play_board[0][0] == ' O '  and $play_board[1][0] == ' O '  and $play_board[2][0] == ' O ';
-        case $play_board[0][1] == ' O '  and $play_board[1][1] == ' O '  and $play_board[2][1] == ' O ';
-        case $play_board[0][2] == ' O '  and $play_board[1][2] == ' O '  and $play_board[2][2] == ' O ';
+        case $play_board[0][0] == ' O '  and $play_board[1][0] == ' O '  and $play_board[2][0] == ' O ':
+        case $play_board[0][1] == ' O '  and $play_board[1][1] == ' O '  and $play_board[2][1] == ' O ':
+        case $play_board[0][2] == ' O '  and $play_board[1][2] == ' O '  and $play_board[2][2] == ' O ':
         //斜め
-        case $play_board[0][0] == ' O '  and $play_board[1][1] == ' O '  and $play_board[2][2] == ' O ';
-        case $play_board[0][2] == ' O '  and $play_board[1][1] == ' O '  and $play_board[2][0] == ' O ';
+        case $play_board[0][0] == ' O '  and $play_board[1][1] == ' O '  and $play_board[2][2] == ' O ':
+        case $play_board[0][2] == ' O '  and $play_board[1][1] == ' O '  and $play_board[2][0] == ' O ':
             echo "you win!\n";
-            break;
+            return 1;
         
-        case $play_board[0][0] == ' X '  and $play_board[0][1] == ' X '  and $play_board[0][2] == ' X ';
-        case $play_board[1][0] == ' X '  and $play_board[1][1] == ' X '  and $play_board[1][2] == ' X ';
-        case $play_board[2][0] == ' X '  and $play_board[2][1] == ' X '  and $play_board[2][2] == ' X ';
+        case $play_board[0][0] == ' X '  and $play_board[0][1] == ' X '  and $play_board[0][2] == ' X ':
+        case $play_board[1][0] == ' X '  and $play_board[1][1] == ' X '  and $play_board[1][2] == ' X ':
+        case $play_board[2][0] == ' X '  and $play_board[2][1] == ' X '  and $play_board[2][2] == ' X ':
         //縦
-        case $play_board[0][0] == ' X '  and $play_board[1][0] == ' X '  and $play_board[2][0] == ' X ';
-        case $play_board[0][1] == ' X '  and $play_board[1][1] == ' X '  and $play_board[2][1] == ' X ';
-        case $play_board[0][2] == ' X '  and $play_board[1][2] == ' X '  and $play_board[2][2] == ' X ';
+        case $play_board[0][0] == ' X '  and $play_board[1][0] == ' X '  and $play_board[2][0] == ' X ':
+        case $play_board[0][1] == ' X '  and $play_board[1][1] == ' X '  and $play_board[2][1] == ' X ':
+        case $play_board[0][2] == ' X '  and $play_board[1][2] == ' X '  and $play_board[2][2] == ' X ':
         //斜め
-        case $play_board[0][0] == ' X '  and $play_board[1][1] == ' X '  and $play_board[2][2] == ' X ';
-        case $play_board[0][2] == ' X '  and $play_board[1][1] == ' X '  and $play_board[2][0] == ' X ';
+        case $play_board[0][0] == ' X '  and $play_board[1][1] == ' X '  and $play_board[2][2] == ' X ':
+        case $play_board[0][2] == ' X '  and $play_board[1][1] == ' X '  and $play_board[2][0] == ' X ':
             echo "cpus win!\n";
-            break;
+            return 1;
+        default:
+            return 0;
     }
 }
 
