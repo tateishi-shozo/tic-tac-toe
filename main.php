@@ -105,8 +105,12 @@ function cpuPut(array $board){
 ///////////////////////////////////
 
 
+<<<<<<< HEAD
 
 while(empty($judgement)){
+=======
+for($x=0 ; $x <= 2 ; $x++){
+>>>>>>> parent of 02909a1 (勝利判定後にループ抜ける処理途中)
 
 $input =  playerTurn();
 
@@ -122,8 +126,12 @@ $cpu_board = cpuPut($player_board);
 
 printBoard($cpu_board);
 
+<<<<<<< HEAD
 $judgement = victoryJudgment($cpu_board);
 
 $x = $x + 1;
+=======
+victoryJudgment($cpu_board);
+>>>>>>> parent of 02909a1 (勝利判定後にループ抜ける処理途中)
 
 }
