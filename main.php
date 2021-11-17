@@ -70,16 +70,17 @@ function victoryJudgment(array $play_board): bool
     }
 }
 
-function cpuPut($board){
-    $cpu_row = rand(0,2);
-    $cpu_col=rand(0,2);
-    if($board[$cpu_row][$cpu_col] == NONE ){
-        $board[$cpu_row][$cpu_col] = PIECE_X;
-        echo "cpu turn!\n";
-        return $board;
-    }else{
-        return cpuPut($board);
-    }
+function cpuPut(array $board){
+    do {
+        $cpu_row = rand(0,2);
+        $cpu_col = rand(0,2);
+        if($board[$cpu_row][$cpu_col] == NONE ){
+            $board[$cpu_row][$cpu_col] = PIECE_X;
+            echo "cpu turn!\n";
+            return $board;
+            break;
+        }
+    }while( $board[$cpu_row][$cpu_col] == PIECE_X or $board[$cpu_row][$cpu_col] == PIECE_O );
 }
 
 // function topOrBottom(){
@@ -103,11 +104,7 @@ function cpuPut($board){
 
 ///////////////////////////////////
 
-// if(top_or_bottom()){
-//     echo '先攻じゃぁぁぁ';
-// }else{
-//     echo '後攻じゃぁぁぁ';
-// }
+
 
 while(empty($judgement)){
 
