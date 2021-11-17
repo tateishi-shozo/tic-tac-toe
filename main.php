@@ -83,15 +83,15 @@ function cpuPut(array $board){
     }while( $board[$cpu_row][$cpu_col] == PIECE_X or $board[$cpu_row][$cpu_col] == PIECE_O );
 }
 
-// function topOrBottom(){
-//     echo "Do you want to be the first to start? yes or no.\n";
-//     $answer = trim(fgets(STDIN));
-//     if($answer == "yes" or $answer == "y"){
-//         return true;
-//     }else{
-//         return false;
-//     }
-// }
+function topOrBottom(){
+    echo "Do you want to be the first to start? yes or no.\n";
+    $answer = trim(fgets(STDIN));
+    if($answer == "yes" or $answer == "y"){
+        return true;
+    }else{
+        return false;
+    }
+}
 
 // function nExists(){
 //     for ($a=0 ; $a <= 2 ; $a++){
@@ -105,12 +105,8 @@ function cpuPut(array $board){
 ///////////////////////////////////
 
 
-<<<<<<< HEAD
 
 while(empty($judgement)){
-=======
-for($x=0 ; $x <= 2 ; $x++){
->>>>>>> parent of 02909a1 (勝利判定後にループ抜ける処理途中)
 
 $input =  playerTurn();
 
@@ -126,12 +122,8 @@ $cpu_board = cpuPut($player_board);
 
 printBoard($cpu_board);
 
-<<<<<<< HEAD
 $judgement = victoryJudgment($cpu_board);
 
 $x = $x + 1;
-=======
-victoryJudgment($cpu_board);
->>>>>>> parent of 02909a1 (勝利判定後にループ抜ける処理途中)
 
 }
