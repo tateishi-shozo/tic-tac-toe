@@ -83,15 +83,15 @@ function cpuPut(array $board){
     }while( $board[$cpu_row][$cpu_col] == PIECE_X or $board[$cpu_row][$cpu_col] == PIECE_O );
 }
 
-function topOrBottom(){
-    echo "Do you want to be the first to start? yes or no.\n";
-    $answer = trim(fgets(STDIN));
-    if($answer == "yes" or $answer == "y"){
-        return true;
-    }else{
-        return false;
-    }
-}
+// function topOrBottom(){
+//     echo "Do you want to be the first to start? yes or no.\n";
+//     $answer = trim(fgets(STDIN));
+//     if($answer == "yes" or $answer == "y"){
+//         return true;
+//     }else{
+//         return false;
+//     }
+// }
 
 // function nExists(){
 //     for ($a=0 ; $a <= 2 ; $a++){
