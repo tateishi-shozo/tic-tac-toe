@@ -93,6 +93,17 @@ function topOrBottom(){
     }
 }
 
+function gameEnd(){
+    echo "Continue? yes or no.\n";
+    $answer = trim(fgets(STDIN));
+    if($answer == "yes" or $answer == "y"){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+
 // function nExists(){
 //     for ($a=0 ; $a <= 2 ; $a++){
 //         for($b=0 ; $b <= 2 ; $b++){
@@ -103,49 +114,50 @@ function topOrBottom(){
 // }
 
 ///////////////////////////////////
+do{
+    if(topOrBottom()){
+        while(empty($judgement)){
 
-if(topOrBottom()){
-    while(empty($judgement)){
-
-        $input =  playerTurn();
-    
-        if($x==0){
-            $player_board = playerPut($input[0],$input[1],$standard_board);
-        }else{
-            $player_board = playerPut($input[0],$input[1],$cpu_board);
-        }
-    
-        printBoard($player_board);
-    
-        $cpu_board = cpuPut($player_board);
-    
-        printBoard($cpu_board);
-    
-        $judgement = victoryJudgment($cpu_board);
-    
-        $x = $x + 1;
-    
-    }
-}else{
-    while(empty($judgement)){
-
-        if($x==0){
-            $cpu_board = cpuPut($standard_board);
-        }else{
+            $input =  playerTurn();
+        
+            if($x==0){
+                $player_board = playerPut($input[0],$input[1],$standard_board);
+            }else{
+                $player_board = playerPut($input[0],$input[1],$cpu_board);
+            }
+        
+            printBoard($player_board);
+        
             $cpu_board = cpuPut($player_board);
+        
+            printBoard($cpu_board);
+        
+            $judgement = victoryJudgment($cpu_board);
+        
+            $x = $x + 1;
+        
         }
-    
-        printBoard($cpu_board);
+    }else{
+        while(empty($judgement)){
 
-        $input =  playerTurn();
+            if($x==0){
+                $cpu_board = cpuPut($standard_board);
+            }else{
+                $cpu_board = cpuPut($player_board);
+            }
+        
+            printBoard($cpu_board);
 
-        $player_board = playerPut($input[0],$input[1],$cpu_board);
-    
-        printBoard($player_board);
-    
-        $judgement = victoryJudgment($player_board);
+            $input =  playerTurn();
 
-        $x = $x + 1;
-    
+            $player_board = playerPut($input[0],$input[1],$cpu_board);
+        
+            printBoard($player_board);
+        
+            $judgement = victoryJudgment($player_board);
+
+            $x = $x + 1;
+        
+        }
     }
-}
+}while(gameEnd());
