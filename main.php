@@ -19,20 +19,23 @@ function printBoard($board){
 }
 
 function playerTurn(){
-    echo "Your turn!\n";
-    $row = trim(fgets(STDIN));
-    $col = trim(fgets(STDIN));
+    do{ 
+        echo "Your turn!\n";
+        $row = trim(fgets(STDIN));
+        $col = trim(fgets(STDIN));
+    }while(0>$row or $row>2 or 0>$col or $col>2 );
     return array($row,$col);
 }
 
 //引数の名前は関数内外で合わせた方が良い
 function playerPut($row,$col,$board){
-    if(0<=$row && $row<=2 && 0<=$col&& $col<=2 ){
-        $board[$row][$col] = PIECE_O;
-        return $board;
-    } else{
-        echo "again!";
-    }
+        if($board[$row][$col] == NONE ){
+            $board[$row][$col] = PIECE_O;
+            return $board;
+        }else{
+            echo "again!\n";
+            return 0;
+        }
 }
 
 //定数はシングルクォーテーション
@@ -103,7 +106,7 @@ function gameEnd(){
     }
 }
 
-//ボツメソッド
+//ボツ！！！
 // function drawJudgement(array $board){
 //     for( $a ; $a > 1 ; $a++ ){
 //         for ($b=0 ; $b <= 2 ; $b++){
@@ -124,15 +127,17 @@ function gameEnd(){
 do{
     if(topOrBottom()){
         while(empty($judgement)){
-
-            $input =  playerTurn();
         
             if($x==0){
-                $player_board = playerPut($input[0],$input[1],$standard_board);
+                    $input =  playerTurn();
+                    $player_board = playerPut($input[0],$input[1],$standard_board);
             }else{
-                $player_board = playerPut($input[0],$input[1],$cpu_board);
+                do{
+                    $input =  playerTurn();
+                    $player_board = playerPut($input[0],$input[1],$cpu_board);
+                }while(empty($player_board));
             }
-        
+
             printBoard($player_board);
 
             if( $x == 4 ){
@@ -173,9 +178,10 @@ do{
                 }
             }
 
-            $input =  playerTurn();
-
-            $player_board = playerPut($input[0],$input[1],$cpu_board);
+            do{
+                $input =  playerTurn();
+                $player_board = playerPut($input[0],$input[1],$cpu_board);
+            }while(empty($player_board));
         
             printBoard($player_board);
         
