@@ -103,17 +103,24 @@ function gameEnd(){
     }
 }
 
+//ボツメソッド
+// function drawJudgement(array $board){
+//     for( $a ; $a > 1 ; $a++ ){
+//         for ($b=0 ; $b <= 2 ; $b++){
+//             for($c=0 ; $c <= 2 ; $c++){
+//                 if($board[$b][$c] == PIECE_O or $board[$b][$c] == PIECE_X ){
 
-// function nExists(){
-//     for ($a=0 ; $a <= 2 ; $a++){
-//         for($b=0 ; $b <= 2 ; $b++){
-//         echo $board[$a][$b];
+//                 }else{
+//                     break 3;
+//                 }
+//             }
 //         }
-//         echo "\n";
+//         echo "Draw!";
 //     }
 // }
 
-///////////////////////////////////
+/////////////////////////////////////////////////////////////
+
 do{
     if(topOrBottom()){
         while(empty($judgement)){
@@ -127,6 +134,15 @@ do{
             }
         
             printBoard($player_board);
+
+            if( $x == 4 ){
+                if(victoryJudgment($player_board)){
+                    break;
+                }else{
+                    echo "Draw!\n";
+                    break;
+                }
+            }
         
             $cpu_board = cpuPut($player_board);
         
@@ -140,13 +156,22 @@ do{
     }else{
         while(empty($judgement)){
 
-            if($x==0){
+            if( $x == 0 ){
                 $cpu_board = cpuPut($standard_board);
             }else{
                 $cpu_board = cpuPut($player_board);
             }
-        
+
             printBoard($cpu_board);
+
+            if( $x == 4 ){
+                if(victoryJudgment($cpu_board)){
+                    break;
+                }else{
+                    echo "Draw!\n";
+                    break;
+                }
+            }
 
             $input =  playerTurn();
 
