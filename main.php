@@ -3,15 +3,15 @@ define("PIECE_O"," O ");
 define("PIECE_X"," X " );
 define("NONE"," n ");
 
-$standard_board = [
+$standardBoard = [
     [NONE,NONE,NONE],
     [NONE,NONE,NONE],
     [NONE,NONE,NONE]
 ];
 
-function printBoard($board){
-    for ($i=0 ; $i <= 2 ; $i++){
-        for($j=0 ; $j <= 2 ; $j++){
+function printBoard($board) {
+    for ($i=0 ; $i <= 2 ; $i++) {
+        for($j=0 ; $j <= 2 ; $j++) {
         echo $board[$i][$j];
         }
         echo "\n";
@@ -19,20 +19,20 @@ function printBoard($board){
 }
 
 function playerTurn(){
-    do{ 
+    do { 
         echo "Your turn!\n";
         $row = trim(fgets(STDIN));
         $col = trim(fgets(STDIN));
-    }while(0>$row or $row>2 or 0>$col or $col>2 );
+    } while(0>$row || $row>2 || 0>$col || $col>2 );
     return array($row,$col);
 }
 
 //引数の名前は関数内外で合わせた方が良い
-function playerPut($row,$col,$board){
-        if($board[$row][$col] == NONE ){
+function playerPut($row,$col,$board) {
+        if($board[$row][$col] == NONE ) {
             $board[$row][$col] = PIECE_O;
             return $board;
-        }else{
+        } else {
             echo "again!\n";
             return 0;
         }
@@ -41,31 +41,31 @@ function playerPut($row,$col,$board){
 //定数はシングルクォーテーション
 function victoryJudgment(array $play_board): bool
 {
-    switch($play_board){
+    switch($play_board) {
         //横
-        case $play_board[0][0] == ' O '  and $play_board[0][1] == ' O '  and $play_board[0][2] == ' O ':
-        case $play_board[1][0] == ' O '  and $play_board[1][1] == ' O '  and $play_board[1][2] == ' O ':
-        case $play_board[2][0] == ' O '  and $play_board[2][1] == ' O '  and $play_board[2][2] == ' O ':
+        case $play_board[0][0] == ' O '  && $play_board[0][1] == ' O '  && $play_board[0][2] == ' O ':
+        case $play_board[1][0] == ' O '  && $play_board[1][1] == ' O '  && $play_board[1][2] == ' O ':
+        case $play_board[2][0] == ' O '  && $play_board[2][1] == ' O '  && $play_board[2][2] == ' O ':
         //縦
-        case $play_board[0][0] == ' O '  and $play_board[1][0] == ' O '  and $play_board[2][0] == ' O ':
-        case $play_board[0][1] == ' O '  and $play_board[1][1] == ' O '  and $play_board[2][1] == ' O ':
-        case $play_board[0][2] == ' O '  and $play_board[1][2] == ' O '  and $play_board[2][2] == ' O ':
+        case $play_board[0][0] == ' O '  && $play_board[1][0] == ' O '  && $play_board[2][0] == ' O ':
+        case $play_board[0][1] == ' O '  && $play_board[1][1] == ' O '  && $play_board[2][1] == ' O ':
+        case $play_board[0][2] == ' O '  && $play_board[1][2] == ' O '  && $play_board[2][2] == ' O ':
         //斜め
-        case $play_board[0][0] == ' O '  and $play_board[1][1] == ' O '  and $play_board[2][2] == ' O ':
-        case $play_board[0][2] == ' O '  and $play_board[1][1] == ' O '  and $play_board[2][0] == ' O ':
+        case $play_board[0][0] == ' O '  && $play_board[1][1] == ' O '  && $play_board[2][2] == ' O ':
+        case $play_board[0][2] == ' O '  && $play_board[1][1] == ' O '  && $play_board[2][0] == ' O ':
             echo "you win!\n";
             return 1;
         
-        case $play_board[0][0] == ' X '  and $play_board[0][1] == ' X '  and $play_board[0][2] == ' X ':
-        case $play_board[1][0] == ' X '  and $play_board[1][1] == ' X '  and $play_board[1][2] == ' X ':
-        case $play_board[2][0] == ' X '  and $play_board[2][1] == ' X '  and $play_board[2][2] == ' X ':
+        case $play_board[0][0] == ' X '  && $play_board[0][1] == ' X '  && $play_board[0][2] == ' X ':
+        case $play_board[1][0] == ' X '  && $play_board[1][1] == ' X '  && $play_board[1][2] == ' X ':
+        case $play_board[2][0] == ' X '  && $play_board[2][1] == ' X '  && $play_board[2][2] == ' X ':
         //縦
-        case $play_board[0][0] == ' X '  and $play_board[1][0] == ' X '  and $play_board[2][0] == ' X ':
-        case $play_board[0][1] == ' X '  and $play_board[1][1] == ' X '  and $play_board[2][1] == ' X ':
-        case $play_board[0][2] == ' X '  and $play_board[1][2] == ' X '  and $play_board[2][2] == ' X ':
+        case $play_board[0][0] == ' X '  && $play_board[1][0] == ' X '  && $play_board[2][0] == ' X ':
+        case $play_board[0][1] == ' X '  && $play_board[1][1] == ' X '  && $play_board[2][1] == ' X ':
+        case $play_board[0][2] == ' X '  && $play_board[1][2] == ' X '  && $play_board[2][2] == ' X ':
         //斜め
-        case $play_board[0][0] == ' X '  and $play_board[1][1] == ' X '  and $play_board[2][2] == ' X ':
-        case $play_board[0][2] == ' X '  and $play_board[1][1] == ' X '  and $play_board[2][0] == ' X ':
+        case $play_board[0][0] == ' X '  && $play_board[1][1] == ' X '  && $play_board[2][2] == ' X ':
+        case $play_board[0][2] == ' X '  && $play_board[1][1] == ' X '  && $play_board[2][0] == ' X ':
             echo "cpus win!\n";
             return 1;
         default:
@@ -73,7 +73,7 @@ function victoryJudgment(array $play_board): bool
     }
 }
 
-function cpuPut(array $board){
+function cpuPut(array $board) {
     do {
         $cpu_row = rand(0,2);
         $cpu_col = rand(0,2);
@@ -83,23 +83,23 @@ function cpuPut(array $board){
             return $board;
             break;
         }
-    }while( $board[$cpu_row][$cpu_col] == PIECE_X or $board[$cpu_row][$cpu_col] == PIECE_O );
+    }while ($board[$cpu_row][$cpu_col] == PIECE_X || $board[$cpu_row][$cpu_col] == PIECE_O);
 }
 
-function topOrBottom(){
+function topOrBottom() {
     echo "Do you want to be the first to start? yes or no.\n";
     $answer = trim(fgets(STDIN));
-    if($answer == "yes" or $answer == "y"){
+    if ($answer == "yes" || $answer == "y") {
         return true;
-    }else{
+    } else {
         return false;
     }
 }
 
-function gameEnd(){
+function gameEnd() {
     echo "Continue? yes or no.\n";
     $answer = trim(fgets(STDIN));
-    if($answer == "yes" or $answer == "y"){
+    if($answer == "yes" || $answer == "y"){
         return true;
     }else{
         return false;
@@ -124,24 +124,24 @@ function gameEnd(){
 
 /////////////////////////////////////////////////////////////
 
-do{
-    if(topOrBottom()){
-        while(empty($judgement)){
+do {
+    if(topOrBottom()) {
+        while (empty($judgement)) {
         
-            if($x==0){
+            if ($x == 0) {
                     $input =  playerTurn();
-                    $player_board = playerPut($input[0],$input[1],$standard_board);
-            }else{
-                do{
+                    $playerBoard = playerPut($input[0],$input[1],$standardBoard);
+            } else {
+                do {
                     $input =  playerTurn();
-                    $player_board = playerPut($input[0],$input[1],$cpu_board);
-                }while(empty($player_board));
+                    $playerBoard = playerPut($input[0],$input[1],$cpuBoard);
+                }while (empty($playerBoard));
             }
 
-            printBoard($player_board);
+            printBoard($playerBoard);
 
-            if( $x == 4 ){
-                if(victoryJudgment($player_board)){
+            if($x == 4){
+                if(victoryJudgment($playerBoard)){
                     break;
                 }else{
                     echo "Draw!\n";
@@ -149,11 +149,11 @@ do{
                 }
             }
         
-            $cpu_board = cpuPut($player_board);
+            $cpuBoard = cpuPut($playerBoard);
         
-            printBoard($cpu_board);
+            printBoard($cpuBoard);
         
-            $judgement = victoryJudgment($cpu_board);
+            $judgement = victoryJudgment($cpuBoard);
         
             $x = $x + 1;
         
@@ -161,18 +161,18 @@ do{
     }else{
         while(empty($judgement)){
 
-            if( $x == 0 ){
-                $cpu_board = cpuPut($standard_board);
-            }else{
-                $cpu_board = cpuPut($player_board);
+            if ($x == 0){
+                $cpuBoard = cpuPut($standardBoard);
+            }else {
+                $cpuBoard = cpuPut($playerBoard);
             }
 
-            printBoard($cpu_board);
+            printBoard($cpuBoard);
 
-            if( $x == 4 ){
-                if(victoryJudgment($cpu_board)){
+            if ($x == 4) {
+                if(victoryJudgment($cpuBoard)){
                     break;
-                }else{
+                }else {
                     echo "Draw!\n";
                     break;
                 }
@@ -180,12 +180,12 @@ do{
 
             do{
                 $input =  playerTurn();
-                $player_board = playerPut($input[0],$input[1],$cpu_board);
-            }while(empty($player_board));
+                $playerBoard = playerPut($input[0],$input[1],$cpuBoard);
+            }while(empty($playerBoard));
         
-            printBoard($player_board);
+            printBoard($playerBoard);
         
-            $judgement = victoryJudgment($player_board);
+            $judgement = victoryJudgment($playerBoard);
 
             $x = $x + 1;
         
