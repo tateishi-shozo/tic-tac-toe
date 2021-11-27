@@ -6,9 +6,9 @@ class MrTicTacToe
     CONST NONE = " n ";
 
     public $standard_board = [
-        [NONE,NONE,NONE],
-        [NONE,NONE,NONE],
-        [NONE,NONE,NONE]
+        ['NONE','NONE','NONE'],
+        ['NONE','NONE','NONE'],
+        ['NONE','NONE','NONE']
     ];
     
     public function printBoard($board){
@@ -97,7 +97,7 @@ class User
     }
 }
 
-class CUP
+class Cpu
 {
     public function cpuPut(array $board){
         do {
@@ -115,24 +115,28 @@ class CUP
 
 //////////////////////////////////////////////////////////////////
 
+$user = new User;
+$tictactoe = new MrTicTacToe;
+$cpu = new Cpu;
+
 do{
-    if(topOrBottom()){
+    if($user->topOrBottom()){
         while(empty($judgement)){
         
             if($x==0){
-                    $input =  playerTurn();
-                    $player_board = playerPut($input[0],$input[1],$standard_board);
+                    $input =  $user->playerTurn();
+                    $player_board = $user->playerPut($input[0],$input[1],$standard_board);
             }else{
                 do{
-                    $input =  playerTurn();
-                    $player_board = playerPut($input[0],$input[1],$cpu_board);
+                    $input =  $user->playerTurn();
+                    $player_board = $user->playerPut($input[0],$input[1],$cpu_board);
                 }while(empty($player_board));
             }
 
-            printBoard($player_board);
+            $tictactoe->printBoard($player_board);
 
             if( $x == 4 ){
-                if(victoryJudgment($player_board)){
+                if($tictactoe->victoryJudgment($player_board)){
                     break;
                 }else{
                     echo "Draw!\n";
@@ -140,28 +144,27 @@ do{
                 }
             }
         
-            $cpu_board = cpuPut($player_board);
+            $cpu_board = $cpu->cpuPut($player_board);
         
-            printBoard($cpu_board);
+            $tictactoe->printBoard($cpu_board);
         
-            $judgement = victoryJudgment($cpu_board);
+            $judgement = $tictactoe->victoryJudgment($cpu_board);
         
             $x = $x + 1;
-        
         }
     }else{
         while(empty($judgement)){
 
             if( $x == 0 ){
-                $cpu_board = cpuPut($standard_board);
+                $cpu_board = $cpu->cpuPut($standard_board);
             }else{
-                $cpu_board = cpuPut($player_board);
+                $cpu_board = $cpu->cpuPut($player_board);
             }
 
-            printBoard($cpu_board);
+            $tictactoe->printBoard($cpu_board);
 
             if( $x == 4 ){
-                if(victoryJudgment($cpu_board)){
+                if($tictactoe->victoryJudgment($cpu_board)){
                     break;
                 }else{
                     echo "Draw!\n";
@@ -170,18 +173,18 @@ do{
             }
 
             do{
-                $input =  playerTurn();
-                $player_board = playerPut($input[0],$input[1],$cpu_board);
+                $input =  $user->playerTurn();
+                $player_board = $user->playerPut($input[0],$input[1],$cpu_board);
             }while(empty($player_board));
         
-            printBoard($player_board);
+            $tictactoe->printBoard($player_board);
         
-            $judgement = victoryJudgment($player_board);
+            $judgement = $tictactoe->victoryJudgment($player_board);
 
             $x = $x + 1;
         
         }
     }
-}while(gameEnd());
+}while($tictactoe->gameEnd());
 
 
