@@ -57,7 +57,7 @@ class MrTicTacToe
 
 class User
 {
-    function topOrBottom(){
+    public function topOrBottom(){
         echo "Do you want to be the first to start? yes or no.\n";
         $answer = trim(fgets(STDIN));
         if($answer == "yes" or $answer == "y"){
@@ -67,7 +67,7 @@ class User
         }
     }
 
-    function playerTurn(){
+    public function playerTurn(){
         do{ 
             echo "Your turn!\n";
             $row = trim(fgets(STDIN));
@@ -76,7 +76,7 @@ class User
         return array($row,$col);
     }
 
-    function playerPut($row,$col,$board){
+    public function playerPut($row,$col,$board){
         if($board[$row][$col] == NONE ){
             $board[$row][$col] = PIECE_O;
             return $board;
@@ -86,7 +86,7 @@ class User
         }
     }
 
-    function gameEnd(){
+    public function gameEnd(){
         echo "Continue? yes or no.\n";
         $answer = trim(fgets(STDIN));
         if($answer == "yes" or $answer == "y"){
@@ -99,7 +99,7 @@ class User
 
 class CUP
 {
-    function cpuPut(array $board){
+    public function cpuPut(array $board){
         do {
             $cpu_row = rand(0,2);
             $cpu_col = rand(0,2);
