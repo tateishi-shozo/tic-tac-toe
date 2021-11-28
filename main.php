@@ -1,14 +1,14 @@
 <?php 
 class MrTicTacToe
 {
-    CONST PICE_O = " O ";
-    CONST PICE_X = " X ";
+    CONST PIECE_O = " O ";
+    CONST PIECE_X = " X ";
     CONST NONE = " n ";
 
     public $standard_board = [
-        ['NONE','NONE','NONE'],
-        ['NONE','NONE','NONE'],
-        ['NONE','NONE','NONE']
+        [self::NONE,self::NONE,self::NONE],
+        [self::NONE,self::NONE,self::NONE],
+        [self::NONE,self::NONE,self::NONE]
     ];
     
     public function printBoard($board){
@@ -77,8 +77,8 @@ class User
     }
 
     public function playerPut($row,$col,$board){
-        if($board[$row][$col] == NONE ){
-            $board[$row][$col] = PIECE_O;
+        if($board[$row][$col] == MrTicTacToe::NONE ){
+            $board[$row][$col] = MrTicTacToe::PIECE_O;
             return $board;
         }else{
             echo "again!\n";
@@ -99,25 +99,26 @@ class User
 
 class Cpu
 {
+    //多分条件分岐でNONE,PIECE＿Xは引数で渡した方が良さそう
     public function cpuPut(array $board){
         do {
             $cpu_row = rand(0,2);
             $cpu_col = rand(0,2);
-            if($board[$cpu_row][$cpu_col] == NONE ){
-                $board[$cpu_row][$cpu_col] = PIECE_X;
+            if($board[$cpu_row][$cpu_col] == MrTicTacToe::NONE ){
+                $board[$cpu_row][$cpu_col] = MrTicTacToe::PIECE_X;
                 echo "cpu turn!\n";
                 return $board;
                 break;
             }
-        }while( $board[$cpu_row][$cpu_col] == PIECE_X or $board[$cpu_row][$cpu_col] == PIECE_O );
+        }while( $board[$cpu_row][$cpu_col] == MrTicTacToe::PIECE_X or $board[$cpu_row][$cpu_col] == MrTicTacToe::PIECE_O );
     }
 }
 
 //////////////////////////////////////////////////////////////////
 
-$user = new User;
-$tictactoe = new MrTicTacToe;
-$cpu = new Cpu;
+$user = new User();
+$tictactoe = new MrTicTacToe();
+$cpu = new Cpu();
 
 do{
     if($user->topOrBottom()){
@@ -125,7 +126,7 @@ do{
         
             if($x==0){
                     $input =  $user->playerTurn();
-                    $player_board = $user->playerPut($input[0],$input[1],$standard_board);
+                    $player_board = $user->playerPut($input[0],$input[1],$tictactoe->standard_board);
             }else{
                 do{
                     $input =  $user->playerTurn();
@@ -156,7 +157,7 @@ do{
         while(empty($judgement)){
 
             if( $x == 0 ){
-                $cpu_board = $cpu->cpuPut($standard_board);
+                $cpu_board = $cpu->cpuPut($tictactoe->standard_board);
             }else{
                 $cpu_board = $cpu->cpuPut($player_board);
             }
@@ -185,6 +186,4 @@ do{
         
         }
     }
-}while($tictactoe->gameEnd());
-
-
+}while($user->gameEnd());
