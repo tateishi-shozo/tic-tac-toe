@@ -172,7 +172,6 @@ do{
                     break;
                 }
             }
-
             do{
                 $input =  $user->playerTurn();
                 $player_board = $user->playerPut($input[0],$input[1],$cpu_board);
