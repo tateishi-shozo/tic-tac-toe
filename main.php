@@ -10,6 +10,8 @@ class MrTicTacToe
         [self::NONE,self::NONE,self::NONE],
         [self::NONE,self::NONE,self::NONE]
     ];
+
+    public $x = 0;
     
     public function printBoard($board){
         for ($i=0 ; $i <= 2 ; $i++){
@@ -47,7 +49,7 @@ class MrTicTacToe
             //斜め
             case $play_board[0][0] == ' X '  and $play_board[1][1] == ' X '  and $play_board[2][2] == ' X ':
             case $play_board[0][2] == ' X '  and $play_board[1][1] == ' X '  and $play_board[2][0] == ' X ':
-                echo "cpus win!\n";
+                echo "cpu win!\n";
                 return 1;
             default:
                 return 0;
@@ -116,11 +118,14 @@ class Cpu
 
 //////////////////////////////////////////////////////////////////
 
-$user = new User();
-$tictactoe = new MrTicTacToe();
-$cpu = new Cpu();
 
 do{
+    $user = new User();
+    $tictactoe = new MrTicTacToe();
+    $cpu = new Cpu();
+
+    $judgement = NULL;
+
     if($user->topOrBottom()){
         while(empty($judgement)){
         
@@ -172,10 +177,9 @@ do{
                     break;
                 }
             }
-            do{
-                $input =  $user->playerTurn();
-                $player_board = $user->playerPut($input[0],$input[1],$cpu_board);
-            }while(empty($player_board));
+
+            $input =  $user->playerTurn();
+            $player_board = $user->playerPut($input[0],$input[1],$cpu_board);
         
             $tictactoe->printBoard($player_board);
         
