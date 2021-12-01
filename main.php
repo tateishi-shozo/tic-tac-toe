@@ -10,8 +10,6 @@ class MrTicTacToe
         [self::NONE,self::NONE,self::NONE],
         [self::NONE,self::NONE,self::NONE]
     ];
-
-    public $x = 0;
     
     public function printBoard($board){
         for ($i=0 ; $i <= 2 ; $i++){
@@ -53,6 +51,22 @@ class MrTicTacToe
                 return 1;
             default:
                 return 0;
+        }
+    }
+
+    public function drawJudgement(array $board,$judgement)
+    {
+        if(empty($judgement)){
+            for ($i=0 ; $i <= 2 ; $i++){
+                for($j=0 ; $j <= 2 ; $j++){
+                   if( $board[$i][$j] == ' n ') {
+                       echo "Draw!";
+                       return 1;
+                       break 2;
+                   } 
+                }
+            }
+            return 0;
         }
     }
 }
@@ -125,6 +139,7 @@ do{
     $cpu = new Cpu();
 
     $judgement = NULL;
+    $X = 0;
 
     if($user->topOrBottom()){
         while(empty($judgement)){
@@ -190,3 +205,4 @@ do{
         }
     }
 }while($user->gameEnd());
+//ブランチ
